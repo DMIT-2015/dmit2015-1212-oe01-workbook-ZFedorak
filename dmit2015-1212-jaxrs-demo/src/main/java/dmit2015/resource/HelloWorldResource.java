@@ -8,18 +8,17 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
 
 /**
- *
  * curl -k -i https://localhost:8443/dmit2015-1212-jaxrs-demo/webapi/helloworld -H 'Accept: text/plain'
  * curl -k -i -X GET https://localhost:8443/dmit2015-1212-jaxrs-demo/webapi/helloworld -H 'Accept: text/html'
  * curl -k -i -X GET https://localhost:8443/dmit2015-1212-jaxrs-demo/webapi/helloworld -H 'Accept: application/json'
  * curl -OJ -k -X GET https://localhost:8443/dmit2015-1212-jaxrs-demo/webapi/helloworld/image
- * 
  */
 @RequestScoped
 @Path("/helloworld")
@@ -53,7 +52,7 @@ public class HelloWorldResource {
         File imageFile = new File(URI.create("file:///home/user2015/Pictures/globe1.jpeg"));
         return Response
                 .ok(imageFile)
-                .header("Content-Disposition","attachment; filename=globe1.jpeg")
+                .header("Content-Disposition", "attachment; filename=globe1.jpeg")
                 .build();
 
 //        InputStream is = getClass().getResourceAsStream("/images/globe2.png");

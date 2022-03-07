@@ -10,7 +10,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 
-
 @ApplicationScoped
 @Transactional
 public class MovieRepository {
@@ -60,15 +59,15 @@ public class MovieRepository {
 
     public List<Movie> findAll() {
         return em.createQuery(
-                "SELECT m FROM Movie m "
-                , Movie.class)
+                        "SELECT m FROM Movie m "
+                        , Movie.class)
                 .getResultList();
     }
 
     public List<Movie> findAllOrderByTitle() {
         return em.createQuery(
-                "SELECT m FROM Movie m ORDER BY m.title"
-                , Movie.class)
+                        "SELECT m FROM Movie m ORDER BY m.title"
+                        , Movie.class)
                 .getResultList();
     }
 }

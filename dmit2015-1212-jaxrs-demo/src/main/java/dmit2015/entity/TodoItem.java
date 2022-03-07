@@ -10,7 +10,8 @@ import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class TodoItem implements Serializable {
 

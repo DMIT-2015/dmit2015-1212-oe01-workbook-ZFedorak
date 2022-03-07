@@ -36,7 +36,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * https://github.com/rest-assured/rest-assured/wiki/Usage
  * http://www.mastertheboss.com/jboss-frameworks/resteasy/restassured-tutorial
  * https://github.com/FasterXML/jackson-databind
- *
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -55,7 +54,7 @@ public class TodoItemResourceArquillianRestAssuredIT {
         mavenArtifactIdId = model.getArtifactId();
         resourceUrl = String.format("http://localhost:8080/%s/%s", mavenArtifactIdId, todoItemResourcePath);
         final String archiveName = model.getArtifactId() + ".war";
-        return ShrinkWrap.create(WebArchive.class,archiveName)
+        return ShrinkWrap.create(WebArchive.class, archiveName)
                 .addAsLibraries(pomFile.resolve("com.h2database:h2:1.4.200").withTransitivity().asFile())
 //                .addAsLibraries(pomFile.resolve("org.hsqldb:hsqldb:2.6.1").withTransitivity().asFile())
 //                .addAsLibraries(pomFile.resolve("com.microsoft.sqlserver:mssql-jdbc:10.2.0.jre17").withTransitivity().asFile())
@@ -69,7 +68,7 @@ public class TodoItemResourceArquillianRestAssuredIT {
                 .addAsResource("META-INF/persistence.xml")
                 .addAsResource("META-INF/sql/import-data.sql")
 //                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addAsWebInfResource(EmptyAsset.INSTANCE,"beans.xml");
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Test
@@ -86,7 +85,7 @@ public class TodoItemResourceArquillianRestAssuredIT {
     @RunAsClient
     void shouldListAll() throws JsonProcessingException {
         Response response = given()
-        		.urlEncodingEnabled(false)
+                .urlEncodingEnabled(false)
                 .accept(ContentType.JSON)
                 .when()
                 .get(resourceUrl)
@@ -98,7 +97,8 @@ public class TodoItemResourceArquillianRestAssuredIT {
         String jsonBody = response.getBody().asString();
 
         Jsonb jsonb = JsonbBuilder.create();
-        List<TodoItem> todos = jsonb.fromJson(jsonBody, new ArrayList<TodoItem>(){}.getClass().getGenericSuperclass());
+        List<TodoItem> todos = jsonb.fromJson(jsonBody, new ArrayList<TodoItem>() {
+        }.getClass().getGenericSuperclass());
 
         assertEquals(3, todos.size());
         TodoItem firstTodoItem = todos.get(0);

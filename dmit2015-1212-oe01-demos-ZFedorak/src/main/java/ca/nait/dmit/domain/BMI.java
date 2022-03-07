@@ -31,10 +31,11 @@ public class BMI {
         this.height = height;
     }
 
-    public double bmi(){
+    public double bmi() {
         return 0;
     }
-    public String bmiCategory(){
+
+    public String bmiCategory() {
         return "";
     }
 }

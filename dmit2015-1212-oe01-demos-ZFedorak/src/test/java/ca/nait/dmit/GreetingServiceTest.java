@@ -19,8 +19,10 @@ under the License.
 package ca.nait.dmit;
 
 import jakarta.inject.Inject;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;

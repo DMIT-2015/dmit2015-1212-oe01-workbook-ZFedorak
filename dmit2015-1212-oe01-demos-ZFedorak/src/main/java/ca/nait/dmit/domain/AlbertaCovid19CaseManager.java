@@ -11,25 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AlbertaCovid19CaseManager{
+public class AlbertaCovid19CaseManager {
 
     private static AlbertaCovid19CaseManager instance;
 
     public static AlbertaCovid19CaseManager getInstance() throws IOException {
         // https://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples#thread-safe-singleton    if(instance == null){
-            synchronized (AlbertaCovid19CaseManager.class) {
-                if(instance == null){
-                    instance = new AlbertaCovid19CaseManager();
-                }
+        synchronized (AlbertaCovid19CaseManager.class) {
+            if (instance == null) {
+                instance = new AlbertaCovid19CaseManager();
             }
+        }
 
         return instance;
     }
+
     @Getter
     private List<AlbertaCovid19Case> albertaCovid19CaseList = new ArrayList<>();
 
     private AlbertaCovid19CaseManager() throws IOException {
-        try(var reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/data/covid-19-alberta-statistics-data.csv")))) {
+        try (var reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/data/covid-19-alberta-statistics-data.csv")))) {
 
             String lineText;
             // Declare a delimiter that looks for a comma inside the value
@@ -37,7 +38,7 @@ public class AlbertaCovid19CaseManager{
             // skip first line
             reader.readLine();
             var dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            while((lineText = reader.readLine()) != null){
+            while ((lineText = reader.readLine()) != null) {
                 // Create an object for each row in the file.
                 AlbertaCovid19Case currentCase = new AlbertaCovid19Case();
                 // -1 limit allows for any number of fields
@@ -50,20 +51,20 @@ public class AlbertaCovid19CaseManager{
                 //4 - "Age group"
                 //5 - "Case status"
                 //6 - "Case type"
-                currentCase.setId(Integer.parseInt(values[0].replaceAll("\"","")));
-                currentCase.setDateReported(LocalDate.parse(values[1].replaceAll("\"",""), dateTimeFormatter));
-                currentCase.setAhsZone(values[2].replaceAll("\"",""));
-                currentCase.setGender(values[3].replaceAll("\"",""));
-                currentCase.setAgeGroup(values[4].replaceAll("\"",""));
-                currentCase.setCaseStatus(values[5].replaceAll("\"",""));
-                currentCase.setCaseType(values[6].replaceAll("\"",""));
+                currentCase.setId(Integer.parseInt(values[0].replaceAll("\"", "")));
+                currentCase.setDateReported(LocalDate.parse(values[1].replaceAll("\"", ""), dateTimeFormatter));
+                currentCase.setAhsZone(values[2].replaceAll("\"", ""));
+                currentCase.setGender(values[3].replaceAll("\"", ""));
+                currentCase.setAgeGroup(values[4].replaceAll("\"", ""));
+                currentCase.setCaseStatus(values[5].replaceAll("\"", ""));
+                currentCase.setCaseType(values[6].replaceAll("\"", ""));
 
                 albertaCovid19CaseList.add(currentCase);
             }
         }
     }
 
-    public List<String> findDistinctAhsZone(){
+    public List<String> findDistinctAhsZone() {
         return albertaCovid19CaseList
                 .stream()
                 //.map(AlbertaCovid19Case::getAhsZone)
@@ -74,7 +75,7 @@ public class AlbertaCovid19CaseManager{
                 .collect(Collectors.toList());
     }
 
-    public long activeCaseCount(){
+    public long activeCaseCount() {
         return albertaCovid19CaseList
                 .stream()
                 .filter(item -> item.getCaseStatus().equalsIgnoreCase("Active"))
@@ -82,7 +83,7 @@ public class AlbertaCovid19CaseManager{
 
     }
 
-    public long activeCaseCountByAhsZone(String ahsZone){
+    public long activeCaseCountByAhsZone(String ahsZone) {
         return albertaCovid19CaseList
                 .stream()
                 .filter(item -> item.getCaseStatus().equalsIgnoreCase("Active"))
@@ -90,7 +91,7 @@ public class AlbertaCovid19CaseManager{
                 .count();
     }
 
-    public long activeCaseCountByAhsZoneAndDateRange(String ahsZone, LocalDate fromDate, LocalDate toDate){
+    public long activeCaseCountByAhsZoneAndDateRange(String ahsZone, LocalDate fromDate, LocalDate toDate) {
         return albertaCovid19CaseList
                 .stream()
                 .filter(item -> item.getAhsZone().equalsIgnoreCase(ahsZone))

@@ -12,10 +12,11 @@ public class BMI {
     private double weight;
     private double height;
 
-    public double bmi(){
+    public double bmi() {
         return 703 * weight / Math.pow(height, 2);
     }
-    public String bmiCategory(){
+
+    public String bmiCategory() {
         return "";
     }
 }

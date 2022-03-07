@@ -12,53 +12,52 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
+
 import java.net.URI;
 import java.util.Optional;
 
 
 /**
  * * Web API with CRUD methods for managing TodoItem.
- *
- *  URI						    Http Method     Request Body		                        Description
- * 	----------------------      -----------		------------------------------------------- ------------------------------------------
- *	/webapi/TodoItems			POST			{"name":"Demo DMIT2015 assignment 1",       Create a new TodoItem
- *                                         	    "complete":false}
- * 	/webapi/TodoItems/{id}		GET			                                                Find one TodoItem with a id value
- * 	/webapi/TodoItems		    GET			                                                Find all TodoItem
- * 	/webapi/TodoItems/{id}      PUT             {"id":5,                                    Update the TodoItem
- * 	                                            "name":"Submitted DMIT2015 assignment 7",
- *                                              "complete":true}
- * 	/webapi/TodoItems/{id}		DELETE			                                            Remove the TodoItem
- *
-
- curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems
-
- curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/1
-
- curl -i -X POST http://localhost:8080//dmit2015-jaxrs-demo/webapi/TodoItems \
- -d '{"name":"Finish DMIT2015 Assignment 1","complete":false}' \
- -H 'Content-Type:application/json'
-
- curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
-
- curl -i -X PUT http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4 \
- -d '{"id":4,"name":"Demo DMIT2015 Assignment 1","complete":true}' \
- -H 'Content-Type:application/json'
-
- curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
-
- curl -i -X DELETE http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
-
- curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
-
- *
+ * <p>
+ * URI						    Http Method     Request Body		                        Description
+ * ----------------------      -----------		------------------------------------------- ------------------------------------------
+ * /webapi/TodoItems			POST			{"name":"Demo DMIT2015 assignment 1",       Create a new TodoItem
+ * "complete":false}
+ * /webapi/TodoItems/{id}		GET			                                                Find one TodoItem with a id value
+ * /webapi/TodoItems		    GET			                                                Find all TodoItem
+ * /webapi/TodoItems/{id}      PUT             {"id":5,                                    Update the TodoItem
+ * "name":"Submitted DMIT2015 assignment 7",
+ * "complete":true}
+ * /webapi/TodoItems/{id}		DELETE			                                            Remove the TodoItem
+ * <p>
+ * <p>
+ * curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems
+ * <p>
+ * curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/1
+ * <p>
+ * curl -i -X POST http://localhost:8080//dmit2015-jaxrs-demo/webapi/TodoItems \
+ * -d '{"name":"Finish DMIT2015 Assignment 1","complete":false}' \
+ * -H 'Content-Type:application/json'
+ * <p>
+ * curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
+ * <p>
+ * curl -i -X PUT http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4 \
+ * -d '{"id":4,"name":"Demo DMIT2015 Assignment 1","complete":true}' \
+ * -H 'Content-Type:application/json'
+ * <p>
+ * curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
+ * <p>
+ * curl -i -X DELETE http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
+ * <p>
+ * curl -i -X GET http://localhost:8080/dmit2015-jaxrs-demo/webapi/TodoItems/4
  */
 
 @ApplicationScoped
 // This is a CDI-managed bean that is created only once during the life cycle of the application
-@Path("TodoItems")	        // All methods of this class are associated this URL path
-@Consumes(MediaType.APPLICATION_JSON)	// All methods this class accept only JSON format data
-@Produces(MediaType.APPLICATION_JSON)	// All methods returns data that has been converted to JSON format
+@Path("TodoItems")            // All methods of this class are associated this URL path
+@Consumes(MediaType.APPLICATION_JSON)    // All methods this class accept only JSON format data
+@Produces(MediaType.APPLICATION_JSON)    // All methods returns data that has been converted to JSON format
 public class TodoItemResource {
 
     @Context

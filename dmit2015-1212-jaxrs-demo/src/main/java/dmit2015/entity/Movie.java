@@ -34,8 +34,8 @@ public class Movie implements Serializable {
     @NotNull(message = "The Release Date field is required")
     private LocalDate releaseDate;
 
-    @DecimalMin(value = "1.00",message = "The price must be a number between 0.00 and 100.00.")
-    @DecimalMax(value = "100.00",message = "The price must be a number between 0.00 and 100.00.")
+    @DecimalMin(value = "1.00", message = "The price must be a number between 0.00 and 100.00.")
+    @DecimalMax(value = "100.00", message = "The price must be a number between 0.00 and 100.00.")
     private BigDecimal price;
 
     @Column(nullable = false, length = 30)

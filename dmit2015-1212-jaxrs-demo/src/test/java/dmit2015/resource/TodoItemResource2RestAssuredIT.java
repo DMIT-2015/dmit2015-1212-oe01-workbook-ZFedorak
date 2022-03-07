@@ -43,7 +43,8 @@ class TodoItemResource2RestAssuredIT {
         String jsonBody = response.getBody().asString();
 
         Jsonb jsonb = JsonbBuilder.create();
-        List<TodoItem> todos = jsonb.fromJson(jsonBody, new ArrayList<TodoItem>(){}.getClass().getGenericSuperclass());
+        List<TodoItem> todos = jsonb.fromJson(jsonBody, new ArrayList<TodoItem>() {
+        }.getClass().getGenericSuperclass());
 
         assertEquals(3, todos.size());
         TodoItem firstTodoItem = todos.get(0);

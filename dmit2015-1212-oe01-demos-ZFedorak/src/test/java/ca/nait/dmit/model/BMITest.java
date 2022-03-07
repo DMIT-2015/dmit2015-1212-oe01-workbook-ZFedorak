@@ -8,7 +8,7 @@ class BMITest {
 
     @Test
     void bmiShouldBeUnderweight() {
-        BMI bmi1 =new BMI();
+        BMI bmi1 = new BMI();
         bmi1.setWeight(100);
         bmi1.setHeight(66);
         assertEquals(16.1, bmi1.bmi(), 0.05);
